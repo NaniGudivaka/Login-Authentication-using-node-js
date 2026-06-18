@@ -114,7 +114,9 @@ function Signup() {
             Login
           </Link>
         </p>
-
+          <p className="mt-4 text-center text-sm text-gray-600">
+  ⚠️ Backend deployment is currently being finalized. Some authentication features may be temporarily unavailable.
+</p>
       </div>
     </div>
   );

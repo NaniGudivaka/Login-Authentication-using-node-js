@@ -1,12 +1,13 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import axios from "axios";
 
 function Login() {
   const navigate = useNavigate();
 
   const [formData, setFormData] = useState({
-    email: "nani@gmail.com",
-    password: "147852369",
+    email: "",
+    password: "",
   });
 
   const [error, setError] = useState("");
@@ -18,24 +19,43 @@ function Login() {
       [e.target.name]: e.target.value,
     });
   }
+async function handleSubmit(e) {
+  e.preventDefault();
 
-  function handleSubmit(e) {
-    e.preventDefault();
-
-    if (!formData.email || !formData.password) {
-      setError("All fields are required");
-      return;
+  setLoading(true);
+  setError("");
+try {
+  const response = await axios.post(
+    "https://backend-login-authentication-with-node-js.onrender.com/auth/login",
+    {
+      email: formData.email,
+      password: formData.password,
+    },
+    {
+      withCredentials: true,
     }
+  );
 
-    setError("");
-    setLoading(true);
+  console.log(response.data);
 
-    setTimeout(() => {
-      localStorage.setItem("isAuthenticated", "true");
-      setLoading(false);
-      navigate("/dashboard");
-    }, 1500);
-  }
+  localStorage.setItem(
+    "isAuthenticated",
+    "true"
+  );
+
+  setLoading(false);
+
+  navigate("/dashboard");
+
+} catch (err) {
+  setLoading(false);
+
+  setError(
+    err.response?.data?.message ||
+    "Login failed"
+  );
+}
+}
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100 px-4">
@@ -50,6 +70,7 @@ function Login() {
             type="email"
             name="email"
             placeholder="Email"
+            value={formData.email}
             onChange={handleChange}
             className="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-blue-500"
           />
@@ -58,6 +79,7 @@ function Login() {
             type="password"
             name="password"
             placeholder="Password"
+            value={formData.password}
             onChange={handleChange}
             className="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-blue-500"
           />

@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import axios from "axios";
 
 function Signup() {
   const navigate = useNavigate();
@@ -21,32 +22,57 @@ function Signup() {
     });
   }
 
-  function handleSubmit(e) {
-    e.preventDefault();
 
-    if (
-      !formData.name ||
-      !formData.email ||
-      !formData.password ||
-      !formData.confirmPassword
-    ) {
-      setError("All fields are required");
-      return;
-    }
+async function handleSubmit(e) {
+  e.preventDefault();
 
-    if (formData.password !== formData.confirmPassword) {
-      setError("Passwords do not match");
-      return;
-    }
-
-    setError("");
-    setLoading(true);
-
-    setTimeout(() => {
-      setLoading(false);
-      navigate("/");
-    }, 1500);
+  if (
+    !formData.name ||
+    !formData.email ||
+    !formData.password ||
+    !formData.confirmPassword
+  ) {
+    setError("All fields are required");
+    return;
   }
+
+  if (formData.password !== formData.confirmPassword) {
+    setError("Passwords do not match");
+    return;
+  }
+
+  try {
+    setLoading(true);
+    setError("");
+
+    const response = await axios.post(
+      "https://backend-login-authentication-with-node-js.onrender.com/auth/signup",
+      {
+        name: formData.name,
+        email: formData.email,
+        password: formData.password,
+      }
+    );
+
+    console.log(response.data);
+
+    setLoading(false);
+
+    alert("Signup successful!");
+
+    navigate("/");
+
+  } catch (err) {
+    setLoading(false);
+
+    setError(
+      err.response?.data?.message ||
+      "Signup failed"
+    );
+
+    console.log(err.response?.data);
+  }
+}
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100 px-4">

@@ -109,7 +109,7 @@ function Login() {
           </Link>
         </p>
         <p className="mt-4 text-center text-sm text-gray-600">
-          ⚠️ Authentication is functional. Additional features and security enhancements are currently being implemented.
+         🚀 This project is actively maintained with ongoing feature enhancements and improvements.
         </p>
       </div>
 

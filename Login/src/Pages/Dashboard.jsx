@@ -1,8 +1,30 @@
 import { useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
 import axios from "axios";
 
 function Dashboard() {
   const navigate = useNavigate();
+
+  const [user, setUser] = useState(null);
+
+  useEffect(() => {
+    async function getProfile() {
+      try {
+        const res = await axios.get(
+          "https://backend-login-authentication-with-node-js.onrender.com/auth/profile",
+          {
+            withCredentials: true,
+          }
+        );
+
+        setUser(res.data);
+      } catch (err) {
+        console.log(err);
+      }
+    }
+
+    getProfile();
+  }, []);
 
   async function handleLogout() {
     try {
@@ -15,7 +37,6 @@ function Dashboard() {
       );
 
       localStorage.removeItem("isAuthenticated");
-
       navigate("/");
     } catch (err) {
       console.log(err);
@@ -30,9 +51,17 @@ function Dashboard() {
             Dashboard
           </h1>
 
-          <p className="text-gray-600 mb-6">
-            Welcome User 👋
-          </p>
+          {user && (
+            <>
+              <p className="text-gray-600">
+                Welcome {user.name} 👋
+              </p>
+
+              <p className="text-gray-600 mb-6">
+                {user.email}
+              </p>
+            </>
+          )}
 
           <button
             onClick={handleLogout}

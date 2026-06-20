@@ -19,43 +19,43 @@ function Login() {
       [e.target.name]: e.target.value,
     });
   }
-async function handleSubmit(e) {
-  e.preventDefault();
+  async function handleSubmit(e) {
+    e.preventDefault();
 
-  setLoading(true);
-  setError("");
-try {
-  const response = await axios.post(
-    "https://backend-login-authentication-with-node-js.onrender.com/auth/login",
-    {
-      email: formData.email,
-      password: formData.password,
-    },
-    {
-      withCredentials: true,
+    setLoading(true);
+    setError("");
+    try {
+      const response = await axios.post(
+        "https://backend-login-authentication-with-node-js.onrender.com/auth/login",
+        {
+          email: formData.email,
+          password: formData.password,
+        },
+        {
+          withCredentials: true,
+        }
+      );
+
+      console.log(response.data);
+
+      localStorage.setItem(
+        "isAuthenticated",
+        "true"
+      );
+
+      setLoading(false);
+
+      navigate("/dashboard");
+
+    } catch (err) {
+      setLoading(false);
+
+      setError(
+        err.response?.data?.message ||
+        "Login failed"
+      );
     }
-  );
-
-  console.log(response.data);
-
-  localStorage.setItem(
-    "isAuthenticated",
-    "true"
-  );
-
-  setLoading(false);
-
-  navigate("/dashboard");
-
-} catch (err) {
-  setLoading(false);
-
-  setError(
-    err.response?.data?.message ||
-    "Login failed"
-  );
-}
-}
+  }
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100 px-4">
@@ -109,12 +109,12 @@ try {
           </Link>
         </p>
         <p className="mt-4 text-center text-sm text-gray-600">
-  ⚠️ Backend deployment is currently being finalized. Some authentication features may be temporarily unavailable.
-</p>
+          ⚠️ Authentication is functional. Additional features and security enhancements are currently being implemented.
+        </p>
       </div>
-      
+
     </div>
-    
+
   );
 }
 

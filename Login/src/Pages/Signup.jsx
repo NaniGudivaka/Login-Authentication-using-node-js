@@ -23,56 +23,56 @@ function Signup() {
   }
 
 
-async function handleSubmit(e) {
-  e.preventDefault();
+  async function handleSubmit(e) {
+    e.preventDefault();
 
-  if (
-    !formData.name ||
-    !formData.email ||
-    !formData.password ||
-    !formData.confirmPassword
-  ) {
-    setError("All fields are required");
-    return;
+    if (
+      !formData.name ||
+      !formData.email ||
+      !formData.password ||
+      !formData.confirmPassword
+    ) {
+      setError("All fields are required");
+      return;
+    }
+
+    if (formData.password !== formData.confirmPassword) {
+      setError("Passwords do not match");
+      return;
+    }
+
+    try {
+      setLoading(true);
+      setError("");
+
+      const response = await axios.post(
+        "https://backend-login-authentication-with-node-js.onrender.com/auth/signup",
+        {
+          name: formData.name,
+          email: formData.email,
+          password: formData.password,
+        }
+      );
+
+      console.log(response.data);
+
+      setLoading(false);
+
+      alert("Signup successful!");
+
+      navigate("/");
+
+    } catch (err) {
+      setLoading(false);
+
+      setError(
+        err.response?.data?.message ||
+        "Signup failed"
+      );
+
+      console.log(err.response?.data);
+    }
   }
-
-  if (formData.password !== formData.confirmPassword) {
-    setError("Passwords do not match");
-    return;
-  }
-
-  try {
-    setLoading(true);
-    setError("");
-
-    const response = await axios.post(
-      "https://backend-login-authentication-with-node-js.onrender.com/auth/signup",
-      {
-        name: formData.name,
-        email: formData.email,
-        password: formData.password,
-      }
-    );
-
-    console.log(response.data);
-
-    setLoading(false);
-
-    alert("Signup successful!");
-
-    navigate("/");
-
-  } catch (err) {
-    setLoading(false);
-
-    setError(
-      err.response?.data?.message ||
-      "Signup failed"
-    );
-
-    console.log(err.response?.data);
-  }
-}
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100 px-4">
@@ -140,9 +140,9 @@ async function handleSubmit(e) {
             Login
           </Link>
         </p>
-          <p className="mt-4 text-center text-sm text-gray-600">
-  ⚠️ Backend deployment is currently being finalized. Some authentication features may be temporarily unavailable.
-</p>
+        <p className="mt-4 text-center text-sm text-gray-600">
+          ⚠️ Authentication is functional. Additional features and security enhancements are currently being implemented.
+        </p>
       </div>
     </div>
   );

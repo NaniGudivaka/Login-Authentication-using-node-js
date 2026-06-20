@@ -1,16 +1,71 @@
-# React + Vite
+# Login Authentication System
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A full-stack authentication application built using React, Node.js, Express.js, MySQL, JWT, and bcrypt.
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+- User Registration
+- User Login
+- Password Hashing with bcrypt
+- JWT Authentication
+- Protected Routes
+- Logout Functionality
+- Secure Cookies
+- Rate Limiting
 
-## React Compiler
+## Tech Stack
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+### Frontend
+- React.js
+- React Router DOM
+- Axios
 
-## Expanding the ESLint configuration
+### Backend
+- Node.js
+- Express.js
+- JWT
+- bcrypt
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+### Database
+- MySQL (TiDB Cloud)
+
+## Project Highlights
+
+- Secure user authentication system
+- Password hashing using bcrypt
+- JWT-based authorization
+- Protected dashboard route
+- REST API integration
+- Responsive UI
+
+## Through this project, I gained practical experience in:
+
+- React Authentication Flow
+- REST API Development
+- MySQL Database Operations
+- JWT Authentication
+- Password Hashing
+- Middleware Creation
+- Route Protection
+- Backend Security Practices
+- Frontend and Backend Integration
+- Deployment using Vercel and Render
+
+## Future Improvements
+
+- Forgot Password Feature
+- Email Verification
+- Refresh Tokens
+- User Profile Management
+- Role-Based Authorization
+- Redis Session Management
+
+## Live Demo
+
+Frontend: https://login-authentication-using-node-js.vercel.app/
+
+Backend: https://backend-login-authentication-with-node-js.onrender.com/
+
+## Author
+
+Nani Gudivaka

@@ -53,11 +53,11 @@ function Dashboard() {
 
           {user && (
             <>
-              <p className="text-gray-600">
+              <p className="text-gray-700 text-xl font-bold">
                 Welcome {user.name} 👋
               </p>
 
-              <p className="text-gray-600 mb-6">
+              <p className="text-gray-700 mb-6 text-lg font-semibold">
                 {user.email}
               </p>
             </>
